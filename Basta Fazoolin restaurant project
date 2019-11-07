@@ -12,6 +12,11 @@ kid_items = {
   'chicken nuggets': 6.50, 'fusilli with wild mushrooms': 12.00, 'apple juice': 3.00
 }
 
+arepa_items = {
+  'arepa pabellon': 7.00, 'pernil arepa': 8.50, 'guayanes arepa': 8.00, 'jamon arepa': 7.50
+}
+
+
 class Menu:
   def __init__(self, name, items, start_time, end_time):
     self.name = name
@@ -34,10 +39,40 @@ brunch = Menu("brunch", brunch_items, 1100, 1600)
 early_bird = Menu("early bird", early_bird_items, 1500, 1800)
 dinner = Menu("dinner", dinner_items, 1700, 2300)
 kids = Menu("kids", kid_items, 1100, 2100)
+arepa = Menu("arepa menu", arepa_items, 1000, 2000)
 
+class Franchise:
+  def __init__(self, address, menus):
+    self.address = address
+    self.menus = menus
+    
+  
+  def available_menus(self, time):
+    menus_list = []
+    for i in self.menus:
+      if time >= i.start_time and time < i.end_time:
+        menus_list.append(i)
+    return(menus_list)
+
+
+    
+flagship_store = Franchise("1232 West End Road",[brunch, early_bird, dinner, kids])   
+new_installment = Franchise("12 East Mulberry Street", [brunch, early_bird, dinner, kids])
+arepa_place = Franchise("189 Fitzgerald Avenue", arepa_items)
+
+
+class Business:
+  def __init__(self, name, franchises):
+    self.name = name
+    self.franchises = franchises
+
+    
+first_business = Business("Basta Fazoolin' with my Heart", [flagship_store, new_installment])   
+second_business = Business("Take a' Arepa", arepa_place)
 
 #print(dinner)
-
 #print(brunch.calculate_bill(["pancakes", "home fries", "coffee"]))
-
+#print(early_bird.calculate_bill(["salumeria plate", "mushroom ravioli (vegan)"]))
+#print(flagship_store.available_menus(1200))
+#print(flagship_store.available_menus(1700))
 
